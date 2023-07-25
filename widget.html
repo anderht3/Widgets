@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Number Input Widget</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    #widget-container {
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 5px;
+      width: 300px;
+      margin: 20px auto;
+    }
+
+    #number-input {
+      width: 100%;
+      padding: 5px;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    #submit-button {
+      margin-top: 10px;
+    }
+    
+    #reset-button {
+      margin-top: 10px;
+    }
+    
+    #progress-bar {
+      position: relative;
+      width: 100%;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      height: 20px;
+      margin-top: 1px;
+    }
+
+    #progress-indicator {
+      height: 100%;
+      background-color: #ffb6c1;
+      border-radius: 5px;
+    }
+    
+    #progress-current-number {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    color: #ffb6c1; /* You can change the color as needed */
+    font-size: 14px;
+    }
+    
+   #progress-label {
+    text-align: center;
+    font-size: 14px;
+    color: #999; /* You can change the color as needed */
+    position: relative;
+    top: 20px; /* Adjust this value as per your preference to position the label */
+    z-index: 1;
+  }
+
+
+  #choose-progress {
+    margin-right: 10px;
+  }
+
+  /* Styles for the "Test" progress bar */
+  #test-progress-label {
+    text-align: center;
+    font-size: 14px;
+    color: #999;
+    position: relative;
+    top: 33px;
+    z-index: 1;
+  }
+
+  #test-progress-bar-container {
+    margin-top: 15px;
+  }
+
+  #test-progress-bar {
+    position: relative;
+    width: 100%;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 20px;
+    margin-top: 10px;
+  }
+
+  #test-progress-indicator {
+    height: 100%;
+    background-color: #ffb6c1;
+    border-radius: 5px;
+  }
+
+  #test-progress-current-number {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    color: #ffb6c1;
+    font-size: 14px;
+  }
+      #cumulative-progress-bar-container {
+    margin-top: 15px;
+  }
+   
+
+  #cumulative-progress-bar {
+    position: relative;
+    width: 100%;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 20px;
+    margin-top: 10px;
+  }
+
+  #cumulative-progress-indicator {
+    height: 100%;
+    background-color: #00bfff; /* You can change the color as needed */
+    border-radius: 5px;
+  }
+
+  #cumulative-progress-current-number {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    color: #00bfff; /* You can change the color as needed */
+    font-size: 14px;
+  }
+    
+  #cumulative-progress-label {
+    text-align: center;
+    font-size: 14px;
+    color: #999;
+    position: relative;
+    top: 33px;
+    z-index: 1;
+  }
+    
+  #rent-progress-label {
+    text-align: center;
+    font-size: 14px;
+    color: #999;
+    position: relative;
+    top: 33px;
+    z-index: 1;
+  }
+
+  #rent-progress-bar-container {
+    margin-top: 15px;
+  }
+
+  #rent-progress-bar {
+    position: relative;
+    width: 100%;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 20px;
+    margin-top: 10px;
+  }
+
+  #rent-progress-indicator {
+    height: 100%;
+    background-color: #ffb6c1;
+    border-radius: 5px;
+  }
+
+  #rent-progress-current-number {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    color: #ffb6c1;
+    font-size: 14px;
+  }
+    
+  #wants-progress-label {
+    text-align: center;
+    font-size: 14px;
+    color: #999;
+    position: relative;
+    top: 33px;
+    z-index: 1;
+  }
+
+  #wants-progress-bar-container {
+    margin-top: 15px;
+  }
+
+  #wants-progress-bar {
+    position: relative;
+    width: 100%;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 20px;
+    margin-top: 10px;
+  }
+
+  #wants-progress-indicator {
+    height: 100%;
+    background-color: #ffb6c1;
+    border-radius: 5px;
+  }
+
+  #wants-progress-current-number {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    color: #ffb6c1;
+    font-size: 14px;
+  }
+ 
+  #debt-progress-label {
+    text-align: center;
+    font-size: 14px;
+    color: #999;
+    position: relative;
+    top: 33px;
+    z-index: 1;
+  }
+
+  #debt-progress-bar-container {
+    margin-top: 15px;
+  }
+
+  #debt-progress-bar {
+    position: relative;
+    width: 100%;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 20px;
+    margin-top: 10px;
+  }
+
+  #debt-progress-indicator {
+    height: 100%;
+    background-color: #ffb6c1;
+    border-radius: 5px;
+  }
+
+  #debt-progress-current-number {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    color: #ffb6c1;
+    font-size: 14px;
+  }    
+    
+    
+  </style>
+</head>
+<body>
+  <div id="widget-container">
+    <label for="number-input">Finance Tracker:</label>
+    <div class="input-wrapper">
+      <select id="choose-progress">
+        <option value="progress">Food</option>
+        <option value="test-progress">Savings</option>
+        <option value="rent-progress">Rent</option>
+        <option value="wants-progress">Wants</option>
+        <option value="debt-progress">Debt</option>
+      </select>
+      <input type="text" id="number-input" placeholder="e.g., 123.45">
+      <button id="submit-button">Submit</button>
+    </div>
+    <button id="reset-button">Reset</button>
+    
+    <!-- Transparent label for main progress bar -->
+    <div id="progress-label">Food</div>
+
+    <div id="progress-bar-container">
+      <div id="progress-bar">
+        <div id="progress-indicator"></div>
+        <!-- Current number inside the main progress bar -->
+        <div id="progress-current-number">0</div>
+      </div>
+    </div>
+
+    <!-- Transparent label for test progress bar -->
+    <div id="test-progress-label">Savings</div>
+
+    <div id="test-progress-bar-container">
+      <div id="test-progress-bar">
+        <div id="test-progress-indicator"></div>
+        <!-- Current number inside the test progress bar -->
+        <div id="test-progress-current-number">0</div>
+      </div>
+    </div>
+    
+        <!-- Transparent label for test progress bar -->
+    <div id="rent-progress-label">Rent and Needs</div>
+
+    <div id="rent-progress-bar-container">
+      <div id="rent-progress-bar">
+        <div id="rent-progress-indicator"></div>
+        <!-- Current number inside the test progress bar -->
+        <div id="rent-progress-current-number">0</div>
+      </div>
+    </div>
+    
+    <div id="wants-progress-label">Wants</div>
+
+    <div id="wants-progress-bar-container">
+      <div id="wants-progress-bar">
+        <div id="wants-progress-indicator"></div>
+        <!-- Current number inside the test progress bar -->
+        <div id="wants-progress-current-number">0</div>
+      </div>
+    </div>
+
+    <div id="debt-progress-label">Debt</div>
+
+    <div id="debt-progress-bar-container">
+      <div id="debt-progress-bar">
+        <div id="debt-progress-indicator"></div>
+        <!-- Current number inside the test progress bar -->
+        <div id="debt-progress-current-number">0</div>
+      </div>
+    </div>
+    
+    <!-- Label for cumulative progress bar -->
+    <div id="cumulative-progress-label">Total</div>
+
+    <div id="cumulative-progress-bar-container">
+      <div id="cumulative-progress-bar">
+        <div id="cumulative-progress-indicator"></div>
+        <!-- Current number inside the cumulative progress bar -->
+        <div id="cumulative-progress-current-number">0</div>
+      </div>
+    </div>
+    
+    <script>
+      // JavaScript code starts here
+      const progressBar = document.getElementById('progress-indicator');
+      const currentNumber = document.getElementById('progress-current-number');
+      const numberInput = document.getElementById('number-input');
+      const submitButton = document.getElementById('submit-button');
+      const resetButton = document.getElementById('reset-button');
+      const chooseProgress = document.getElementById('choose-progress');
+
+      const testProgressBar = document.getElementById('test-progress-indicator');
+      const testCurrentNumber = document.getElementById('test-progress-current-number');
+      
+       const rentProgressBar = document.getElementById('rent-progress-indicator');
+      const rentCurrentNumber = document.getElementById('rent-progress-current-number');
+
+      const wantsProgressBar = document.getElementById('wants-progress-indicator');
+      const wantsCurrentNumber = document.getElementById('wants-progress-current-number');
+      
+      const debtProgressBar = document.getElementById('debt-progress-indicator');
+      const debtCurrentNumber = document.getElementById('debt-progress-current-number');
+      
+      const cumulativeProgressBar = document.getElementById('cumulative-progress-indicator');
+      const cumulativeCurrentNumber = document.getElementById('cumulative-progress-current-number');
+
+      let mainCumulativeValue = 0;
+      let testCumulativeValue = 0;
+      let rentCumulativeValue = 0;
+      let wantsCumulativeValue = 0;
+      let debtCumulativeValue = 0;
+      let cumulativeValue = 0;
+      const max = 4000;
+      const mainMax = 450;
+      const testMax = 500; // The new maximum for the test progress bar
+      const rentMax = 2200;
+      const wantsMax = 350;
+      const debtMax = 500;
+
+      function updateProgressBar() {
+        const progress = (mainCumulativeValue / max) * 100;
+        progressBar.style.width = progress + '%';
+        updateNumberIndicator();
+        updateCumulativeProgressBar();
+      }
+
+      function updateNumberIndicator() {
+        const formattedNumber = '$' + mainCumulativeValue.toFixed(2);
+        currentNumber.textContent = formattedNumber;
+      }
+
+      function updateTestProgressBar() {
+        const progress = (testCumulativeValue / testMax) * 100;
+        testProgressBar.style.width = progress + '%';
+        updateTestNumberIndicator();
+        updateCumulativeProgressBar();
+      }
+
+      function updateTestNumberIndicator() {
+        const formattedNumber = '$' + testCumulativeValue.toFixed(2);
+        testCurrentNumber.textContent = formattedNumber;
+      }
+      
+      function updateRentProgressBar() {
+        const progress = (rentCumulativeValue / rentMax) * 100;
+        rentProgressBar.style.width = progress + '%';
+        updateRentNumberIndicator();
+        updateCumulativeProgressBar();
+      }
+
+      function updateRentNumberIndicator() {
+        const formattedNumber = '$' + rentCumulativeValue.toFixed(2);
+        rentCurrentNumber.textContent = formattedNumber;
+      }
+      
+      function updateWantsProgressBar() {
+        const progress = (wantsCumulativeValue / wantsMax) * 100;
+        wantsProgressBar.style.width = progress + '%';
+        updateWantsNumberIndicator();
+        updateCumulativeProgressBar();
+      }
+
+      function updateWantsNumberIndicator() {
+        const formattedNumber = '$' + wantsCumulativeValue.toFixed(2);
+        wantsCurrentNumber.textContent = formattedNumber;
+      }
+      
+      function updateDebtProgressBar() {
+        const progress = (debtCumulativeValue / debtMax) * 100;
+        debtProgressBar.style.width = progress + '%';
+        updateDebtNumberIndicator();
+        updateCumulativeProgressBar();
+      }
+
+      function updateDebtNumberIndicator() {
+        const formattedNumber = '$' + debtCumulativeValue.toFixed(2);
+        debtCurrentNumber.textContent = formattedNumber;
+      }
+
+      function updateCumulativeProgressBar() {
+        cumulativeValue = mainCumulativeValue + testCumulativeValue + rentCumulativeValue + debtCumulativeValue + wantsCumulativeValue;
+        const progress = (cumulativeValue / max) * 100;
+        cumulativeProgressBar.style.width = progress + '%';
+        updateCumulativeNumberIndicator();
+      }
+
+      function updateCumulativeNumberIndicator() {
+        const formattedNumber = '$' + cumulativeValue.toFixed(2);
+        cumulativeCurrentNumber.textContent = formattedNumber;
+      }
+
+      function handleResetButtonClick() {
+        mainCumulativeValue = 0;
+        testCumulativeValue = 0;
+        rentCumulativeValue = 0;
+        debtCumulativeValue = 0;
+        wantsCumulativeValue = 0;
+        cumulativeValue = 0;
+        numberInput.value = '';
+        updateProgressBar();
+        updateTestProgressBar();
+        updateRentProgressBar();
+        updateDebtProgressBar();
+        updateWantsProgressBar();
+        updateCumulativeProgressBar();
+      }
+
+      function handleSubmitButtonClick() {
+        const selectedProgress = chooseProgress.value;
+        const currentValue = parseFloat(numberInput.value);
+
+        if (!isNaN(currentValue)) {
+          if (selectedProgress === 'progress') {
+            mainCumulativeValue += currentValue;
+            updateProgressBar();
+          } else if (selectedProgress === 'test-progress') {
+            testCumulativeValue += currentValue;
+            updateTestProgressBar();
+          } else if (selectedProgress === 'rent-progress'){
+            rentCumulativeValue += currentValue;
+            updateRentProgressBar();
+          } else if (selectedProgress === 'debt-progress'){
+            debtCumulativeValue += currentValue;
+            updateDebtProgressBar();
+          } else if (selectedProgress === 'wants-progress'){
+            wantsCumulativeValue += currentValue;
+            updateWantsProgressBar();
+          }
+
+          numberInput.value = '';
+        }
+      }
+
+      resetButton.addEventListener('click', handleResetButtonClick);
+      submitButton.addEventListener('click', handleSubmitButtonClick);
+
+      // Initial setup
+      updateProgressBar();
+      updateTestProgressBar();
+      updateRentProgressBar();
+      updateWantsProgressBar();
+      updateDebtProgressBar();
+      updateCumulativeProgressBar();
+    </script>
+</body>
+</html>
